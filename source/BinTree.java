@@ -34,3 +34,76 @@ public class BinTree {
         theBTRootNode = insertAB(theBTRootNode, anyClassBTNode);
     }
 
+    public void deleteMin() {
+
+        theBTRootNode = deleteMin(theBTRootNode);
+
+    }
+
+    private BNode deleteMin(BNode x) {
+        if (x.leftBNode == null) {
+            return x.rightBNode;
+        }
+        x.leftBNode = deleteMin(x.leftBNode);
+
+        return x;
+    }
+
+    public void deleteMax() {
+
+        theBTRootNode = deleteMax(theBTRootNode);
+    }
+
+    private BNode deleteMax(BNode x) {
+        if (x.rightBNode == null) {
+            return x.leftBNode;
+        }
+        x.rightBNode = deleteMax(x.rightBNode);
+
+        return x;
+    }
+
+    public void delete(String key) {
+        theBTRootNode = delete(theBTRootNode, key);
+    }
+
+    private BNode delete(BNode x, String key) {
+        if (x.leftBNode == null && x.rightBNode == null) {
+            if ((key.compareTo(x.getBook().getISBN() + "")) == 0) {
+                if (x.rightBNode == null) {
+                    return x.leftBNode;
+                }
+                if (x.leftBNode == null) {
+                    return x.rightBNode;
+                }
+                BNode t = x;
+
+                x.rightBNode = deleteMin(t.rightBNode);
+                x.leftBNode = t.leftBNode;
+            }
+
+        } else {
+            if ((key.compareTo(x.getBook().getISBN() + "")) == 0) {
+                if (x.rightBNode == null) {
+                    return x.leftBNode;
+                }
+                if (x.leftBNode == null) {
+                    return x.rightBNode;
+                }
+                BNode t = x;
+
+                x.rightBNode = deleteMin(t.rightBNode);
+                x.leftBNode = t.leftBNode;
+            }
+            if (x.leftBNode != null) {
+                x.leftBNode = delete(x.leftBNode, key);
+            }
+            if (x.rightBNode != null) {
+                x.rightBNode = delete(x.rightBNode, key);
+            } else {
+
+            }
+
+        }
+        return x;
+    }
