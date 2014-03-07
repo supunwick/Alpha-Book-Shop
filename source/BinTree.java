@@ -107,3 +107,30 @@ public class BinTree {
         }
         return x;
     }
+ // ------------------ findMinimum-------------------
+    public BNode findMinimum(BNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.leftBNode != null) {
+            return findMinimum(root.leftBNode);
+        }
+
+        return root;
+    }
+
+    // ------------------ InOrder traversal-------------------
+    protected void inorder(BNode theRootNode) {
+        if (theRootNode != null) {
+            inorder(theRootNode.leftBNode);
+            theRootNode.show();
+            inorder(theRootNode.rightBNode);
+        }
+    }
+
+    //calls the method to do in order
+    public void inorderBST() {
+        inorder(theBTRootNode);
+    }
+
