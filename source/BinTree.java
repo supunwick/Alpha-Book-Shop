@@ -134,3 +134,111 @@ public class BinTree {
         inorder(theBTRootNode);
     }
 
+    /**
+     * *********************************************************************
+     * Search
+     * *********************************************************************
+     */
+    // ----- Search for key name and  returns ref. 
+    //              to BNode or null if not found--------
+    protected List<BooksVO> searchByType(BNode theRootNode, List all, String keyName) {
+        //if the root is null returns null
+        if (theRootNode.leftBNode == null && theRootNode.rightBNode == null) {
+
+            if (keyName.compareTo(theRootNode.book.getType()) == 0) {
+                all.add(theRootNode.getBook());
+
+                //checks id the key is smaller than the current
+                //record  if smaller traverses to the left
+            }
+            return all;
+        } else {
+            //checks if they are equal
+            if (keyName.compareTo(theRootNode.book.getType()) == 0) {
+                all.add(theRootNode.getBook());
+
+            }
+            if (theRootNode.leftBNode != null) {
+                searchByType(theRootNode.leftBNode, all, keyName);
+            }
+            if (theRootNode.rightBNode != null) {
+                // if bigger traverses to the left
+                searchByType(theRootNode.rightBNode, all, keyName);
+            }
+
+        }
+        return all;
+    }
+
+    protected List<BooksVO> searchByISBN(BNode theRootNode, List all, String keyName) {
+        //if the root is null returns null
+        if (theRootNode.leftBNode == null && theRootNode.rightBNode == null) {
+            if (keyName.compareTo(theRootNode.book.getISBN() + "") == 0) {
+                all.add(theRootNode.getBook());
+
+            }
+            return all;
+        } else {
+            //checks if they are equal
+            if (keyName.compareTo(theRootNode.book.getISBN() + "") == 0) {
+                all.add(theRootNode.getBook());
+
+                //checks id the key is smaller than the current
+                //record  if smaller traverses to the left
+            }
+            if (theRootNode.leftBNode != null) {
+                searchByISBN(theRootNode.leftBNode, all, keyName);
+            }
+            if (theRootNode.rightBNode != null) {
+                // if bigger traverses to the left
+                searchByISBN(theRootNode.rightBNode, all, keyName);
+            }
+            return all;
+        }
+    }
+
+    protected List<BooksVO> searchByBookName(BNode theRootNode, List all, String keyName) {
+        //if the root is null returns null
+        if (theRootNode.leftBNode == null && theRootNode.rightBNode == null) {
+            if (keyName.compareTo(theRootNode.book.getISBN() + "") == 0) {
+                all.add(theRootNode.getBook());
+
+            }
+            return all;
+        } else {
+            //checks if they are equal
+            if (theRootNode.book.getBook_name().toLowerCase().contains(keyName.toLowerCase())) {
+                all.add(theRootNode.getBook());
+
+                //checks id the key is smaller than the current
+                //record  if smaller traverses to the left
+            }
+            if (theRootNode.leftBNode != null) {
+                searchByBookName(theRootNode.leftBNode, all, keyName);
+            }
+            if (theRootNode.rightBNode != null) {
+                // if bigger traverses to the left
+                searchByBookName(theRootNode.rightBNode, all, keyName);
+            }
+            return all;
+        }
+    }
+// This part was implemented by Supun Wickramasekara
+    public BNode locateByTitle(String key, BNode node) {//pre order implementattion
+        BNode result = null;
+        if (node == null) {
+            return null;
+        }
+        if (node.book.getBook_name().toLowerCase().equals(key.toLowerCase())) {
+            return node;
+        }
+        if (node.leftBNode != null) {
+            result = locateByTitle(key, node.leftBNode);
+        }
+        if (result == null) {
+            result = locateByTitle(key, node.rightBNode);
+        }
+        return result;
+
+    }
+  
