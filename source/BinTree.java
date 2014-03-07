@@ -242,3 +242,22 @@ public class BinTree {
 
     }
   
+ // this part was implemented by Mahil Dilantha
+    
+    public BNode locateByISBN(int key, BNode node) {//pre order implementattion
+        BNode result = null;
+        if (node == null) {
+            return null;
+        }
+        if (node.book.getISBN() == key) {
+            return node;
+        }
+        if (node.leftBNode != null) {
+            result = locateByISBN(key, node.leftBNode);
+        }
+        if (result == null) {
+            result = locateByISBN(key, node.rightBNode);
+        }
+        return result;
+
+    }
